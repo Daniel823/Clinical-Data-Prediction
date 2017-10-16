@@ -1,0 +1,67 @@
+---
+title: "Clinical Data Project"
+output:
+  html_document: default
+  html_notebook: default
+  pdf_document: default
+---
+### Source:
+
+Center for Clinical and Translational Research, Virginia Commonwealth University
+
+### Data Set Information:
+
+The dataset represents 10 years (1999-2008) of clinical care at 130 US hospitals and integrated delivery networks. It includes over 50 features representing patient and hospital outcomes.
+
+The data contains such attributes as patient number, race, gender, age, admission type, time in hospital, medical specialty of admitting physician, number of lab test performed, HbA1c test result, diagnosis, number of medication, diabetic medications, number of outpatient, inpatient, and emergency visits in the year before the hospitalization, etc. [Original Dataset UCI Reop ](http://archive.ics.uci.edu/ml/datasets/Diabetes+130-US+hospitals+for+years+1999-2008#)
+
+## Predicting the number of lab tests for patients diagnosed with diabetes
+
+* *Alternate Hypothesis:* Given predictors x, we have an affect on lab counts y
+* *Null Hypothesis:* Given predictors x, there is no afffect on lab counts y 
+
+### Dataset Assumptions
+*	It is an inpatient encounter (a hospital admission).
+*	It is a diabetic encounter, that is, one during which any kind of diabetes was entered to the system as a diagnosis.
+*	The length of stay was at least 1 day and at most 14 days.
+* Laboratory tests were performed during the encounter.
+* Medications were administered during the encounter.
+
+Dataset Description: [Link](https://www.hindawi.com/journals/bmri/2014/781670/tab1/)
+
+```{r}
+#Race, Gender(5 feature space), Age, AdmissionType, *AdmissionSource(21 feature space), readmitted(3 value feature space)
+
+#1. get the data into one dataset
+library(readr)
+diabetic_data <- read_csv("~/Desktop/ClinicalData/dataset_diabetes/diabetic_data.csv")
+IDs_mapping <- read_csv("~/Desktop/ClinicalData/dataset_diabetes/IDs_mapping.csv")
+
+#Binary vars for Race
+diabetic_data$caucasian <- ifelse(diabetic_data$race == 'Caucasian', 1, 0)
+diabetic_data$african_american <- ifelse(diabetic_data$race == 'AfricanAmerican', 1, 0)
+diabetic_data$asian <- ifelse(diabetic_data$race == 'Asian', 1, 0)
+diabetic_data$hispanic <- ifelse(diabetic_data$race == 'Hispanic', 1, 0)
+diabetic_data$other <- ifelse(diabetic_data$race == 'Other', 1, 0)
+
+#Drop all missing race values
+diabetic_data <- subset(diabetic_data, diabetic_data$race != '?')
+
+#2. Clean the data from null values (Race = 2% data loss)
+
+#3. Transform data to something that is consumable by a model 
+
+
+```
+
+```{r}
+#Tid-Bits 
+#Does admission type 8 have an overall effect on the model?
+#Does the admission source 9,15,17,20,21 have any affect? (They are all null/unavaliable)
+
+
+#Check to see if race is a significant predictor, if not you get 2% of the dataset back lol
+#First pass will be without the payer code becuase we would have to drop too much data to make it work
+#Interesting Idea: What affect does your insurance provider have on the number of tests that you need to get?
+```
+
