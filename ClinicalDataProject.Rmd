@@ -34,8 +34,8 @@ Dataset Description: [Link](https://www.hindawi.com/journals/bmri/2014/781670/ta
 
 #1. get the data into one dataset
 library(readr)
-diabetic_data <- read_csv("~/Desktop/ClinicalData/dataset_diabetes/diabetic_data.csv")
-IDs_mapping <- read_csv("~/Desktop/ClinicalData/dataset_diabetes/IDs_mapping.csv")
+diabetic_data <- read_csv("~/Documents/GitHub/Clinical-Data-Prediction/dataset_diabetes/diabetic_data.csv")
+IDs_mapping <- read_csv("~/Documents/GitHub/Clinical-Data-Prediction/dataset_diabetes/IDs_mapping.csv")
 
 #Binary vars for Race
 diabetic_data$caucasian <- ifelse(diabetic_data$race == 'Caucasian', 1, 0)
